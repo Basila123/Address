@@ -1,98 +1,74 @@
-package com.bridgelabzAddress;
+package com.bridgelabzAddress.;
 
 import java.util.*;
 
-public class AddressBook {
-//main class
-    public static void main(String[] args) {
-        Collection<ContactPerson> Co = new ArrayList<ContactPerson>();
-        Scanner s = new Scanner(System.in);
-        Scanner s1 = new Scanner(System.in);
-        System.out.println("Enter your first name");
-        String firstname = s.next();
-        System.out.println("Enter your last name");
-        String lastname = s.next();
-        System.out.println("Enter your address");
-        String address = s.next();
-        System.out.println("Enter your city");
-        String city = s.next();
-        System.out.println("Enter your state");
-        String state = s.next();
-        System.out.println("Enter your zip");
-        String zip = s.next();
-        System.out.println("Enter your email");
-        String email = s.next();
-        System.out.println("Enter your phnone number");
-        int phno = s1.nextInt();
-        System.out.println("First name:" + firstname);
-        System.out.println("Last name:" + lastname);
-        System.out.println("Address:" + address);
-        System.out.println("City:" + city);
-        System.out.println("State:" + state);
-        System.out.println("Zip" + zip);
-        System.out.println("Email:" + email);
-        System.out.println("Phone Number:" + phno);
+
+public class AddressBook{
+    static String name;
+
+    public static void main(String[] args){
+
+        System.out.println("Welcome to the ADDRESS BOOK");
+        HashMap<String,ContactInfo> addressBook = new HashMap<>();
+
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter 1 to create a new contact");
+        int choice = scanner.nextInt();
+        if (choice==1){
+            ContactInfo contact = new ContactInfo();
+            contact.setContactInfo();
+            name = contact.firstName + " " + contact.lastName;
+            addressBook.put(name,contact);
+            addressBook.get(name).displayContactInfo();
+        }
+
     }
 }
 
+class ContactInfo{
+    String firstName,lastName,address,city,state,zipcode,phoneNo,email;
 
-class ContactPerson {
-    //instance variable
-    String firstname = " ";
-    String lastname = " ";
-    String address = " ";
-    String city = " ";
-    String state = " ";
-    String zip = " ";
-    String email = " ";
-    int phno = 0;
-
-    //constructor
-    ContactPerson(String fname, String lname, String address, String city, String state, String zip, String mail, int phno) {
-        this.firstname = fname;
-        this.lastname = lname;
-        this.address = address;
-        this.city = city;
-        this.state = state;
-        this.zip = zip;
-        this.email = mail;
-        this.phno = phno;
+    public void setFirstName(String firstName){
+        this.firstName=firstName;
     }
-   //use getter to get the value
-    public String getFirstname() {
-        return firstname;
+    public void setLastName(String lastName){
+        this.lastName=lastName;
     }
-
-    public String getLastnamename() {
-        return lastname;
+    public void setAddress(String address){
+        this.address=address;
+    }
+    public void setCity(String city){
+        this.city=city;
+    }
+    public void setState(String state){
+        this.state=state;
+    }
+    public void setZipcode(String zipcode){
+        this.zipcode=zipcode;
+    }
+    public void setPhoneNo(String phoneNo){
+        this.phoneNo=phoneNo;
+    }
+    public void setEmail(String email){
+        this.email=email;
     }
 
-    public String getAddress() {
-        return address;
+    public void setContactInfo() {
+
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter First Name: \n Last Name: \n Address: \n City: \n State: \n Zipcode: \n PhoneNO: \n Email: \n");
+        setFirstName(sc.nextLine());
+        setLastName(sc.nextLine());
+        setAddress(sc.nextLine());
+        setCity(sc.nextLine());
+        setState(sc.nextLine());
+        setZipcode(sc.nextLine());
+        setPhoneNo(sc.nextLine());
+        setEmail(sc.nextLine());
+    }
+    public void displayContactInfo(){
+        System.out.print("First Name: "+firstName+"\n Last Name: "+lastName+"\n Address: "+address+
+                "\n City: "+city+"\n State: "+state+ "\n Zipcode: "+zipcode+"\n PhoneNO: "+phoneNo+"\n Email: "+email);
     }
 
-    public String getCity() {
-        return city;
-    }
-
-    public String getZip() {
-        return zip;
-    }
-
-    public String getState() {
-        return state;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public int getPhno() {
-        return phno;
-    }
-
-    //Over riding
-    public String toString() {
-        return firstname + " " + lastname + " " + address + " " + city + " " + zip + " " + email + " " + phno;
-    }
 }
