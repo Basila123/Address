@@ -1,4 +1,4 @@
-package com.bridgelabzAddress.;
+package com.bridgelabzAddress;
 
 import java.util.*;
 
@@ -14,12 +14,14 @@ public class AddressBook{
         Scanner scanner = new Scanner(System.in);
         System.out.println("Enter 1 to create a new contact");
         int choice = scanner.nextInt();
-        if (choice==1){
+        switch(choice){
+            case 1:
             ContactInfo contact = new ContactInfo();
             contact.setContactInfo();
             name = contact.firstName + " " + contact.lastName;
             addressBook.put(name,contact);
             addressBook.get(name).displayContactInfo();
+            break;
         }
 
     }
@@ -56,14 +58,21 @@ class ContactInfo{
     public void setContactInfo() {
 
         Scanner sc = new Scanner(System.in);
-        System.out.print("Enter First Name: \n Last Name: \n Address: \n City: \n State: \n Zipcode: \n PhoneNO: \n Email: \n");
+        System.out.println("Enter First Name: ");
         setFirstName(sc.nextLine());
+        System.out.println("Last Name:");
         setLastName(sc.nextLine());
+        System.out.print("Enter  Address:");
         setAddress(sc.nextLine());
+        System.out.print("Enter City: ");
         setCity(sc.nextLine());
+        System.out.print("Enter State:");
         setState(sc.nextLine());
+        System.out.print("Enter Zipcode:");
         setZipcode(sc.nextLine());
+        System.out.print(" PhoneNO:");
         setPhoneNo(sc.nextLine());
+        System.out.print("Email: \n");
         setEmail(sc.nextLine());
     }
     public void displayContactInfo(){
