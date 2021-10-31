@@ -1,98 +1,147 @@
+
 package com.bridgelabzAddress;
 
 import java.util.*;
 
 public class AddressBook {
-//main class
+    static String name;
+    static boolean is_Running = false;
+    static HashMap<String, ContactInfo> addressBook = new HashMap<>();
+
     public static void main(String[] args) {
-        Collection<ContactPerson> Co = new ArrayList<ContactPerson>();
-        Scanner s = new Scanner(System.in);
-        Scanner s1 = new Scanner(System.in);
-        System.out.println("Enter your first name");
-        String firstname = s.next();
-        System.out.println("Enter your last name");
-        String lastname = s.next();
-        System.out.println("Enter your address");
-        String address = s.next();
-        System.out.println("Enter your city");
-        String city = s.next();
-        System.out.println("Enter your state");
-        String state = s.next();
-        System.out.println("Enter your zip");
-        String zip = s.next();
-        System.out.println("Enter your email");
-        String email = s.next();
-        System.out.println("Enter your phnone number");
-        int phno = s1.nextInt();
-        System.out.println("First name:" + firstname);
-        System.out.println("Last name:" + lastname);
-        System.out.println("Address:" + address);
-        System.out.println("City:" + city);
-        System.out.println("State:" + state);
-        System.out.println("Zip" + zip);
-        System.out.println("Email:" + email);
-        System.out.println("Phone Number:" + phno);
+
+        AddressBook addressBookObj = new AddressBook();
+        System.out.println("Welcome");
+        while (!is_Running) {
+
+            System.out.println("1 add");
+            System.out.println("2 edit");
+            System.out.println("0 exit");
+            Scanner scanner = new Scanner(System.in);
+            int ch = scanner.nextInt();
+            switch (ch) {
+                case 1:
+                    ContactInfo contact = new ContactInfo();
+                    contact.setContactInfo();
+                    name = contact.firstName.toUpperCase(Locale.ROOT) + " " + contact.lastName.toUpperCase(Locale.ROOT);
+                    addressBook.put(name, contact);
+                    addressBook.get(name).displayContactInfo();
+                    break;
+
+                case 2:
+                    addressBookObj.editContact();
+                    addressBook.get(name).displayContactInfo();
+                    break;
+                case 0:
+                    is_Running = true;
+            }
+        }
+    }
+
+
+    public void editContact() {
+
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter your first name and Last name  : ");
+        String name = sc.nextLine().toUpperCase(Locale.ROOT);
+        if (addressBook.containsKey(name)) {
+            System.out.println("Enter the choice you want to edit:1.Address");
+            System.out.println("2.City");
+            System.out.println("3.State");
+            System.out.println("4. Zipcode");
+            System.out.println("5.Phone Number");
+            System.out.println("6.Email");
+            int choice = sc.nextInt();
+            sc.nextLine();
+            switch (choice) {
+                case 1 -> {
+                    System.out.println("Enter new Address");
+                    addressBook.get(name).setAddress(sc.nextLine());
+                }
+                case 2 -> {
+                    System.out.println("Enter new City");
+                    addressBook.get(name).setCity(sc.nextLine());
+                }
+                case 3 -> {
+                    System.out.println("Enter new State");
+                    addressBook.get(name).setState(sc.nextLine());
+                }
+                case 4 -> {
+                    System.out.println("Enter new ZipCode");
+                    addressBook.get(name).setZipcode(sc.nextLine());
+                }
+                case 5 -> {
+                    System.out.println("Enter new Phone number");
+                    addressBook.get(name).setPhoneNo(sc.nextLine());
+                }
+                case 6 -> {
+                    System.out.println("Enter new Email");
+                    addressBook.get(name).setEmail(sc.nextLine());
+                }
+                default -> System.out.println("Please input a valid number (1-6)");
+            }
+        } else System.out.println("Contact not found");
+
     }
 }
 
+class ContactInfo {
+    String firstName, lastName, address, city, state, zipcode, phoneNo, email;
 
-class ContactPerson {
-    //instance variable
-    String firstname = " ";
-    String lastname = " ";
-    String address = " ";
-    String city = " ";
-    String state = " ";
-    String zip = " ";
-    String email = " ";
-    int phno = 0;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
 
-    //constructor
-    ContactPerson(String fname, String lname, String address, String city, String state, String zip, String mail, int phno) {
-        this.firstname = fname;
-        this.lastname = lname;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public void setAddress(String address) {
         this.address = address;
+    }
+
+    public void setCity(String city) {
         this.city = city;
+    }
+
+    public void setState(String state) {
         this.state = state;
-        this.zip = zip;
-        this.email = mail;
-        this.phno = phno;
-    }
-   //use getter to get the value
-    public String getFirstname() {
-        return firstname;
     }
 
-    public String getLastnamename() {
-        return lastname;
+    public void setZipcode(String zipcode) {
+        this.zipcode = zipcode;
     }
 
-    public String getAddress() {
-        return address;
+    public void setPhoneNo(String phoneNo) {
+        this.phoneNo = phoneNo;
     }
 
-    public String getCity() {
-        return city;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
-    public String getZip() {
-        return zip;
+    public void setContactInfo() {
+
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter First Name:");
+        setFirstName(sc.nextLine());
+        System.out.print("Enter Last Name: ");
+        setLastName(sc.nextLine());
+        System.out.print("Enter Address:");
+        setAddress(sc.nextLine());
+        System.out.print("Enter City:");
+        setCity(sc.nextLine());
+        System.out.print("Enter State:");
+        setState(sc.nextLine());
+        System.out.print("Enter Zip:");
+        setZipcode(sc.nextLine());
+        System.out.print("Enter Phno:");
+        setPhoneNo(sc.nextLine());
+        setEmail(sc.nextLine());
     }
 
-    public String getState() {
-        return state;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public int getPhno() {
-        return phno;
-    }
-
-    //Over riding
-    public String toString() {
-        return firstname + " " + lastname + " " + address + " " + city + " " + zip + " " + email + " " + phno;
+    public void displayContactInfo() {
+        System.out.print(" First Name: " + firstName + "\n Last Name: " + lastName + "\n Address: " + address +
+                "\n City: " + city + "\n State: " + state + "\n Zipcode: " + zipcode + "\n PhoneNO: " + phoneNo + "\n Email: " + email + "\n");
     }
 }
