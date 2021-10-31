@@ -33,10 +33,21 @@ public class AddressBook {
                     addressBookObj.editContact();
                     addressBook.get(name).displayContactInfo();
                     break;
+                case 3:
+                    addressBookObj.deleteContact();
                 case 0:
                     is_Running = true;
             }
         }
+    }public void deleteContact(){
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter the first and last name of the contact you want to delete from AddressBook: ");
+        String name = scanner.nextLine().toUpperCase(Locale.ROOT);
+        if (addressBook.containsKey(name)) {
+            addressBook.remove(name);
+            System.out.println("Contact removed");
+        }else
+            System.out.println("Contact not found");
     }
 
 
@@ -86,9 +97,56 @@ public class AddressBook {
     }
 }
 
-class ContactInfo {
-    String firstName, lastName, address, city, state, zipcode, phoneNo, email;
+class ContactInfo{
+    String firstName,lastName,address,city,state,zipcode,phoneNo,email;
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public void setFirstName(String firstName){
+        this.firstName=firstName;
     }
+    public void setLastName(String lastName){
+        this.lastName=lastName;
+    }
+    public void setAddress(String address){
+        this.address=address;
+    }
+    public void setCity(String city){
+        this.city=city;
+    }
+    public void setState(String state){
+        this.state=state;
+    }
+    public void setZipcode(String zipcode){
+        this.zipcode=zipcode;
+    }
+    public void setPhoneNo(String phoneNo){
+        this.phoneNo=phoneNo;
+    }
+    public void setEmail(String email){
+        this.email=email;
+    }
+
+    public void setContactInfo() {
+
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter First Name");
+        setFirstName(sc.nextLine());
+        System.out.println("Enter Last Name:");
+        setLastName(sc.nextLine());
+        System.out.println("Enter Address");
+        setAddress(sc.nextLine());
+        System.out.println("Enter City");
+        setCity(sc.nextLine());
+        System.out.println("Enter Zipcode");
+        setState(sc.nextLine());
+        System.out.println("Zipcode");
+        setZipcode(sc.nextLine());
+        System.out.println("Enter Phone No");
+        setPhoneNo(sc.nextLine());
+        System.out.println("Enter Mail");
+        setEmail(sc.nextLine());
+    }
+    public void displayContactInfo(){
+        System.out.print(" First Name: "+firstName+"\n Last Name: "+lastName+"\n Address: "+address+
+                "\n City: "+city+"\n State: "+state+ "\n Zipcode: "+zipcode+"\n PhoneNO: "+phoneNo+"\n Email: "+email+"\n");
+    }
+}
